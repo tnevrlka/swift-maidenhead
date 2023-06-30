@@ -19,7 +19,7 @@ struct Maidenhead {
     }
     
     func calculateLocator(location: CLLocationCoordinate2D) -> String {
-        return calculateField(location: location) + calculateSquare(location: location)
+        return calculateField(location: location) + calculateSquare(location: location) + calculateSubSquare(location: location)
     }
     
     private func calculateField(location: CLLocationCoordinate2D) -> String {
@@ -40,5 +40,15 @@ struct Maidenhead {
         let latitudeDigit = String(Int(latitude) % 10)
         
         return longitudeDigit + latitudeDigit
+    }
+    
+    private func calculateSubSquare(location: CLLocationCoordinate2D) -> String {
+        let longitude = location.longitude + 180
+        let longitudeLetter = letters[Int(longitude * 60 / 5) % 24].lowercased()
+
+        let latitude = location.latitude + 90
+        let latitudeLetter = letters[Int(latitude * 60 / 2.5) % 24].lowercased()
+        
+        return longitudeLetter + latitudeLetter
     }
 }
