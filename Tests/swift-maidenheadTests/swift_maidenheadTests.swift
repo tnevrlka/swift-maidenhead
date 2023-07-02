@@ -22,9 +22,9 @@ let testCases = [TestCase(name: "W1AW", latitude: 41.71463, longitude: -72.72713
 final class swift_maidenheadTests: XCTestCase {
     func testMaidenhead() {
         for testCase in testCases {
-            let maidenhead = Maidenhead(precision: Precision.field, location: testCase.location)
-            XCTAssert(maidenhead.locator == testCase.locator,
-                      "expected `\(testCase.locator.prefix(2))`, got `\(maidenhead.locator.prefix(2))`")
+            let locator = calculateLocator(location: testCase.location)
+            XCTAssert(locator == testCase.locator,
+                      "expected `\(testCase.locator)`, got `\(locator)`")
         }
     }
 }
