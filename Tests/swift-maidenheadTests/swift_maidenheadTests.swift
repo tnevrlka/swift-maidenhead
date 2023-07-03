@@ -4,12 +4,12 @@ import CoreLocation
 
 struct TestCase {
     let name: String
-    let location: CLLocationCoordinate2D
+    let coordinate: CLLocationCoordinate2D
     let locator: String
     
     init(name: String, latitude: CLLocationDegrees, longitude: CLLocationDegrees, locator: String) {
         self.name = name
-        self.location = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
+        self.coordinate = CLLocationCoordinate2D.init(latitude: latitude, longitude: longitude)
         self.locator = locator
     }
 }
@@ -22,9 +22,9 @@ let testCases = [TestCase(name: "W1AW", latitude: 41.71463, longitude: -72.72713
 final class swift_maidenheadTests: XCTestCase {
     func testMaidenhead() {
         for testCase in testCases {
-            let locator = calculateLocator(location: testCase.location)
-            XCTAssert(locator == testCase.locator,
-                      "expected `\(testCase.locator)`, got `\(locator)`")
+            let maidenhead = Maidenhead(coordinate: testCase.coordinate)
+            XCTAssert(maidenhead.locator == testCase.locator,
+                      "expected `\(testCase.locator)`, got `\(maidenhead.locator)`")
         }
     }
 }
