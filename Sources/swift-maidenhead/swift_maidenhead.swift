@@ -17,6 +17,12 @@ public struct Maidenhead {
         self.locator = calculateLocator()
     }
     
+    init (precision: Precision, coordinate: CLLocationCoordinate2D) {
+        self.precision = precision
+        self.coordinate = coordinate
+        self.locator = calculateLocator()
+    }
+    
     public func calculateLocator() -> String {
         switch self.precision {
         case .field:
@@ -57,10 +63,5 @@ public struct Maidenhead {
         
         return longitudeLetter + latitudeLetter
     }
-
-    public func calculateGridCorners(locator: String) {
-        
-    }
-
 }
 
